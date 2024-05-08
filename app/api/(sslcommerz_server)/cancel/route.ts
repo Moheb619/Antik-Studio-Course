@@ -1,5 +1,4 @@
-
-import {NextResponse} from "next/server";
-export async function POST(req,res) {
-        return NextResponse.redirect(new URL('/cancel', req.url),303)
+import { NextRequest, NextResponse } from "next/server";
+export async function POST(req: NextRequest, res: NextResponse) {
+  return NextResponse.redirect(new URL("/cancel", req.url), 303);
 }
