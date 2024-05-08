@@ -6,9 +6,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
   const courseId = queryParams.get("courseid");
   const userId = queryParams.get("userid");
 
-  console.log("USer ", userId);
-  console.log("COurse", courseId);
-
   if (!userId || !courseId) {
     return new NextResponse("Unauthorized", { status: 401 });
   }

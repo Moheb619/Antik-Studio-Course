@@ -151,7 +151,6 @@ export async function POST(
     // Get response
     let SSLRes = await fetch(init_url, requestOptions);
     let SSLResJSON = await SSLRes.json();
-    // console.log(SSLResJSON);
 
     return NextResponse.json({ data: SSLResJSON });
   } catch (error) {
