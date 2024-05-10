@@ -14,7 +14,7 @@ export async function POST(
     const { courseId } = params;
     const { url } = await req.json();
 
-    if (!user || !isTeacher(userId)) {
+    if (!userId || !isTeacher(userId)) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
