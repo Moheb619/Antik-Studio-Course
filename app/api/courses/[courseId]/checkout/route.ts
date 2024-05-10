@@ -13,7 +13,7 @@ export async function POST(
   try {
     const user = await currentUser();
 
-    if (!userId) {
+    if (!user) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
