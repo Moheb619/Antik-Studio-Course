@@ -63,6 +63,7 @@ export async function PATCH(
 ) {
   try {
     const { userId } = auth();
+
     const { courseId } = params;
     const values = await req.json();
 

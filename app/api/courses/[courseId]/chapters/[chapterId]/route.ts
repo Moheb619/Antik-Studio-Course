@@ -97,6 +97,7 @@ export async function PATCH(
 ) {
   try {
     const { userId } = auth();
+
     const { isPublished, ...values } = await req.json();
 
     if (!userId) {

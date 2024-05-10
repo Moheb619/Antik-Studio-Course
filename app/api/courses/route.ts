@@ -6,10 +6,10 @@ import { isTeacher } from "@/lib/teacher";
 
 export async function POST(req: Request) {
   try {
-    const { userId } = auth();
     const { title } = await req.json();
+    const { userId } = auth();
 
-    if (!userId || !isTeacher) {
+    if (!user || !isTeacher) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 

@@ -10,6 +10,7 @@ export async function PUT(
 ) {
   try {
     const { userId } = auth();
+
     const { courseId } = params;
     const { list } = await req.json();
 

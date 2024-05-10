@@ -1,6 +1,6 @@
-import { currentUser } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { clerkClient } from "@clerk/nextjs";
+import { clerkClient } from "@clerk/nextjs/server";
 import { v4 as uuidv4 } from "uuid";
 
 import { db } from "@/lib/db";
@@ -13,7 +13,7 @@ export async function POST(
   try {
     const user = await currentUser();
 
-    if (!user || !user.id || !user.emailAddresses?.[0]?.emailAddress) {
+    if (!user) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
@@ -111,7 +111,7 @@ export async function POST(
     formData.append("tran_id", `${tran_id}`);
     formData.append(
       "success_url",
-      `${process.env.NEXT_PUBLIC_APP_URL}/api/success?id=${tran_id}&courseid=${course.id}&userid=${user.id}`
+      `${process.env.NEXT_PUBLIC_APP_URL}/api/success?id=${tran_id}&courseid=${course.id}&userId=${user.id}&signature=${process.env.SUCCESS_SIGNATURE}`
     );
     formData.append(
       "fail_url",

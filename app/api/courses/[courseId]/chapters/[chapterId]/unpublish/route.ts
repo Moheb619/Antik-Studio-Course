@@ -10,6 +10,7 @@ export async function PATCH(
 ) {
   try {
     const { userId } = auth();
+
     const { courseId, chapterId } = params;
 
     if (!userId || !isTeacher(userId)) {

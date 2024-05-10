@@ -10,6 +10,7 @@ export async function DELETE(
 ) {
   try {
     const { userId } = auth();
+
     const { courseId, attachmentId } = params;
 
     if (!userId || !isTeacher(userId)) {
