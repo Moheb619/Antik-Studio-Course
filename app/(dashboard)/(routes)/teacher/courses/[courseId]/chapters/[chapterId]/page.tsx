@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { auth } from "@clerk/nextjs";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { ArrowLeft, Eye, LayoutDashboard, Video } from "lucide-react";
 
@@ -20,7 +21,8 @@ const ChapterIdPage = async ({
     chapterId: string;
   };
 }) => {
-  const { userId } = auth();
+  const data: any = await getServerSession(authOptions);
+  const userId = data?.user?.id;
 
   if (!userId) {
     return redirect("/");

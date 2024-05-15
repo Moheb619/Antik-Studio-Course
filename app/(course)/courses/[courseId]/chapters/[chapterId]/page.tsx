@@ -1,4 +1,5 @@
-import { auth } from "@clerk/nextjs";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { File } from "lucide-react";
 
@@ -16,7 +17,8 @@ const ChapterIdPage = async ({
 }: {
   params: { courseId: string; chapterId: string };
 }) => {
-  const { userId } = auth();
+  const data: any = await getServerSession(authOptions);
+  const userId = data?.user?.id;
 
   if (!userId) {
     return redirect("/");

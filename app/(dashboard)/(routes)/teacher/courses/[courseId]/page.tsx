@@ -1,4 +1,5 @@
-import { auth } from "@clerk/nextjs";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import {
   File,
@@ -26,7 +27,8 @@ const CourseIdPage = async ({
     courseId: string;
   };
 }) => {
-  const { userId } = auth();
+  const data: any = await getServerSession(authOptions);
+  const userId = data?.user?.id;
 
   if (!userId) {
     return redirect("/");

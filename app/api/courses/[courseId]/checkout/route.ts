@@ -1,6 +1,6 @@
-import { currentUser } from "@clerk/nextjs/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 import { NextResponse } from "next/server";
-import { clerkClient } from "@clerk/nextjs/server";
 import { v4 as uuidv4 } from "uuid";
 
 import { db } from "@/lib/db";
@@ -11,7 +11,8 @@ export async function POST(
   { params }: { params: { courseId: string } }
 ) {
   try {
-    const user = await currentUser();
+    const data: any = await getServerSession(authOptions);
+    const user: any = data?.user!;
 
     if (!user) {
       return new NextResponse("Unauthorized", { status: 401 });
@@ -125,15 +126,8 @@ export async function POST(
       "ipn_url",
       `${process.env.NEXT_PUBLIC_APP_URL}/api/ipn?id=${tran_id}`
     );
-    formData.append("cus_name", user.firstName! + " " + user.lastName!);
-    formData.append(
-      "cus_email",
-      (
-        await clerkClient.emailAddresses.getEmailAddress(
-          user.primaryEmailAddressId!
-        )
-      ).emailAddress
-    );
+    formData.append("cus_name", user.name);
+    formData.append("cus_email", user.email);
     formData.append("cus_add1", "Shekhertek 8 Dhaka 1207");
     formData.append("cus_city", "Dhaka");
     formData.append("cus_postcode", "1207");
