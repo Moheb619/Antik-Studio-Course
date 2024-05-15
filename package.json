@@ -4,9 +4,6 @@
   "prisma": {
     "seed": "scripts/seed.ts"
   },
-  "prismaBackup": {
-    "seed": "prisma/seed.ts"
-  },
   "private": true,
   "scripts": {
     "dev": "next dev",
