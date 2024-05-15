@@ -64,12 +64,12 @@
     "uploadthing": "^5.7.4",
     "uuid": "^9.0.1",
     "zod": "^3.22.2",
-    "zustand": "^4.5.2"
+    "zustand": "^4.5.2",
+    "prisma": "^5.14.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
     "@types/uuid": "^9.0.8",
-    "prisma": "^5.14.0",
     "ts-node": "^10.9.2"
   }
 }
