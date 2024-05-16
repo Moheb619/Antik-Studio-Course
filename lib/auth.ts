@@ -23,29 +23,36 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials.password) {
-          return null;
+        try {
+          if (!credentials?.email || !credentials.password) {
+            return null;
+          }
+
+          const user = await db.user.findUnique({
+            where: {
+              email: String(credentials.email),
+            },
+          });
+
+          if (
+            !user ||
+            !(await bcrypt.compare(
+              String(credentials.password),
+              user.password!
+            ))
+          ) {
+            return null;
+          }
+
+          return {
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            randomKey: "Hey cool",
+          };
+        } catch (err) {
+          throw new Error("Next Auth - Authorize: Authentication error");
         }
-
-        const user = await db.user.findUnique({
-          where: {
-            email: String(credentials.email),
-          },
-        });
-
-        if (
-          !user ||
-          !(await bcrypt.compare(String(credentials.password), user.password!))
-        ) {
-          return null;
-        }
-
-        return {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          randomKey: "Hey cool",
-        };
       },
     }),
   ],
