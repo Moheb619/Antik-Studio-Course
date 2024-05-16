@@ -23,13 +23,16 @@ export const RegisterForm = () => {
   const onSubmitHandler: SubmitHandler<CreateUserInput> = async (values) => {
     try {
       setSubmitting(true);
-      const res = await fetch("/api/auth/register", {
-        method: "POST",
-        body: JSON.stringify(values),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_APP_URL}/api/auth/register`,
+        {
+          method: "POST",
+          body: JSON.stringify(values),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (!res.ok) {
         const errorData = await res.json();
