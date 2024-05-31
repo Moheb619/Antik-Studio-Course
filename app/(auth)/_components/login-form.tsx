@@ -44,6 +44,7 @@ export const LoginForm = () => {
 
       if (!res?.error) {
         toast.success("successfully logged in");
+        router.refresh();
         router.push(callbackUrl);
       } else {
         reset({ password: "" });
