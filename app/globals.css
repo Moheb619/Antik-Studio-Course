@@ -108,4 +108,14 @@ body,
   filter: brightness(0.8);
 }
 
+/* Home page news-slider */
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
 @import "~@uploadthing/react/styles.css";
