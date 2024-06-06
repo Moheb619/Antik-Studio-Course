@@ -12,8 +12,8 @@ const NavbarDesktopHomeRoutes = [
   },
   {
     icon: ScrollText,
-    label: "Course",
-    href: "/courses",
+    label: "Dashboard",
+    href: "/dashboard",
   },
   {
     icon: BookOpen,

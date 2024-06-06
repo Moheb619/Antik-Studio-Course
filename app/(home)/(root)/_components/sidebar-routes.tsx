@@ -13,8 +13,8 @@ const homeGuestRoutes = [
   },
   {
     icon: ScrollText,
-    label: "Course",
-    href: "/courses",
+    label: "Dashboard",
+    href: "/dashboard",
   },
   {
     icon: BookOpen,
@@ -36,8 +36,8 @@ const homeUserRoutes = [
   },
   {
     icon: ScrollText,
-    label: "Course",
-    href: "/courses",
+    label: "Dashboard",
+    href: "/dashboard",
   },
   {
     icon: BookOpen,
