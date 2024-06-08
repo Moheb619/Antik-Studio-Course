@@ -4,6 +4,10 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Home, ScrollText, BookOpen, LucideIcon, LogIn } from "lucide-react";
 import Link from "next/link";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { SignOutButton } from "@/components/signout";
+
 const NavbarDesktopHomeRoutes = [
   {
     icon: Home,
@@ -22,7 +26,8 @@ const NavbarDesktopHomeRoutes = [
   },
 ];
 
-export const NavbarDesktopHome = () => {
+export const NavbarDesktopHome = async () => {
+  const data: any = await getServerSession(authOptions);
   return (
     <div className={cn("p-4 flex items-center justify-between")}>
       <div>
@@ -33,7 +38,7 @@ export const NavbarDesktopHome = () => {
       </div>
       <div
         className={cn(
-          "overflow-hidden flex justify-between basis-3/4 bg-gradient-to-r from-[#EF0F0F] to-[#C49191] text-white p-5 rounded-full ml-5"
+          "overflow-hidden flex items-center justify-between basis-3/4 bg-gradient-to-r from-[#EF0F0F] to-[#C49191] text-white p-5 rounded-full ml-5"
         )}
       >
         {NavbarDesktopHomeRoutes.map((route) => (
@@ -50,12 +55,20 @@ export const NavbarDesktopHome = () => {
             </div>
           </Link>
         ))}
-        <Link href={"/login"}>
-          <div className="bg-white text-[#EF0F0F] flex items-center gap-x-3 p-1 pr-10 mr-[-40px] rounded-full hover:font-extrabold hover:drop-shadow-xl cursor-pointer">
-            <LogIn />
-            Login
+        {data?.user ? (
+          <div className="bg-white text-[#EF0F0F] flex items-center gap-x-3 pr-10 mr-[-40px] rounded-full hover:font-extrabold hover:drop-shadow-xl cursor-pointer">
+            <SignOutButton className="hover:font-extrabold " variant="ghost">
+              <LogIn className="mx-1" />
+            </SignOutButton>
           </div>
-        </Link>
+        ) : (
+          <Link href={"/login"}>
+            <div className="bg-white text-[#EF0F0F] flex items-center gap-x-3 p-1 pr-10 mr-[-40px] rounded-full hover:font-extrabold hover:drop-shadow-xl cursor-pointer">
+              <LogIn />
+              Login
+            </div>
+          </Link>
+        )}
       </div>
     </div>
   );
