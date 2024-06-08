@@ -34,7 +34,6 @@ const ChapterIdPage = async ({
       courseId: params.courseId,
     },
     include: {
-      muxData: true,
       course: {
         select: {
           userId: true,

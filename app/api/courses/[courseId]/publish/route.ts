@@ -25,11 +25,7 @@ export async function PATCH(
         id: courseId,
       },
       include: {
-        chapters: {
-          include: {
-            muxData: true,
-          },
-        },
+        chapters: true,
       },
     });
 

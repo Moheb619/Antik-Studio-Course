@@ -1,11 +1,11 @@
-import { Attachment, Chapter } from '@prisma/client'
+import { Attachment, Chapter } from "@prisma/client";
 
-import { db } from '@/lib/db'
+import { db } from "@/lib/db";
 
 interface GetChapterProps {
-  userId: string
-  courseId: string
-  chapterId: string
+  userId: string;
+  courseId: string;
+  chapterId: string;
 }
 
 export const getChapter = async ({
@@ -21,7 +21,7 @@ export const getChapter = async ({
           courseId,
         },
       },
-    })
+    });
 
     const course = await db.course.findUnique({
       where: {
@@ -29,9 +29,10 @@ export const getChapter = async ({
         isPublished: true,
       },
       select: {
+        imageUrl: true,
         price: true,
       },
-    })
+    });
 
     const chapter = await db.chapter.findUnique({
       where: {
@@ -39,30 +40,26 @@ export const getChapter = async ({
         id: chapterId,
         isPublished: true,
       },
-    })
+    });
 
     if (!chapter || !course) {
-      throw new Error('Chapter or course no found')
+      throw new Error("Chapter or course no found");
     }
 
-    let muxData = null
-    let attachments: Attachment[] = []
-    let nextChapter: Chapter | null = null
+    let videoUrl: string | null = null;
+    let attachments: Attachment[] = [];
+    let nextChapter: Chapter | null = null;
 
     if (purchase) {
       attachments = await db.attachment.findMany({
         where: {
           courseId,
         },
-      })
+      });
     }
 
     if (chapter.isFree || purchase) {
-      muxData = await db.muxData.findUnique({
-        where: {
-          chapterId,
-        },
-      })
+      videoUrl = chapter.videoUrl;
 
       nextChapter = await db.chapter.findFirst({
         where: {
@@ -73,9 +70,9 @@ export const getChapter = async ({
           },
         },
         orderBy: {
-          position: 'asc',
+          position: "asc",
         },
-      })
+      });
     }
 
     const userProgress = await db.userProgress.findUnique({
@@ -85,27 +82,27 @@ export const getChapter = async ({
           chapterId,
         },
       },
-    })
+    });
 
     return {
       course,
       chapter,
-      muxData,
+      videoUrl,
       purchase,
       attachments,
       nextChapter,
       userProgress,
-    }
+    };
   } catch (error) {
-    console.log('[GET_CHAPTER]', error)
+    console.log("[GET_CHAPTER]", error);
     return {
       course: null,
       chapter: null,
-      muxData: null,
+      videoUrl: null,
       attachments: [],
       purchased: false,
       nextChapter: null,
       userProgress: null,
-    }
+    };
   }
-}
+};

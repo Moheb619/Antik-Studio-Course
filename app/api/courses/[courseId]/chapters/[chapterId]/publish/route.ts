@@ -42,15 +42,8 @@ export async function PATCH(
       },
     });
 
-    const muxData = await db.muxData.findUnique({
-      where: {
-        chapterId,
-      },
-    });
-
     if (
       !chapter ||
-      !muxData ||
       !chapter.title ||
       !chapter.videoUrl ||
       !chapter.description

@@ -11,7 +11,6 @@ import { InfoCard } from "./_components/info-card";
 export default async function Dashboard() {
   const data: any = await getServerSession(authOptions);
   const userId = data?.user?.id;
-  console.log(data);
 
   if (!userId) {
     return redirect("/");

@@ -2,19 +2,18 @@
 
 import * as z from "zod";
 import axios from "axios";
-import MuxPlayer from "@mux/mux-player-react";
 import { Pencil, PlusCircle, Video } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { Chapter, MuxData } from "@prisma/client";
+import { Chapter } from "@prisma/client";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
 import { FileUpload } from "@/components/file-upload";
 
 interface ChapterVideoFormProps {
-  initialData: Chapter & { muxData?: MuxData | null };
+  initialData: Chapter & { videoUrl?: string | null };
   courseId: string;
   chapterId: string;
 }
@@ -75,7 +74,16 @@ export const ChapterVideoForm = ({
           </div>
         ) : (
           <div className="relative aspect-video mt-2">
-            <MuxPlayer playbackId={initialData?.muxData?.playbackId || ""} />
+            <video width="320" height="240" controls preload="none">
+              <source src={initialData.videoUrl} type="video/mp4" />
+              <track
+                src="/path/to/captions.vtt"
+                kind="subtitles"
+                srcLang="en"
+                label="English"
+              />
+              Your browser does not support the video tag.
+            </video>
           </div>
         ))}
       {isEditing && (
