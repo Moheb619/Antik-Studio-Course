@@ -2,7 +2,14 @@ import Pencil from "@/public/homeimages/pencil.png";
 import Logo from "@/public/antik_studio_logo.png";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { Home, ScrollText, BookOpen, LucideIcon, LogIn } from "lucide-react";
+import {
+  Home,
+  ScrollText,
+  BookOpen,
+  LucideIcon,
+  LogIn,
+  ScanFace,
+} from "lucide-react";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
@@ -31,7 +38,9 @@ export const NavbarDesktopHome = async () => {
   return (
     <div className={cn("p-4 flex items-center justify-between")}>
       <div>
-        <Image alt="pencil logo" src={Pencil} />
+        <Link href={"/"}>
+          <Image alt="pencil logo" src={Pencil} />
+        </Link>
       </div>
       <div>
         <Image alt="logo" src={Logo} />
@@ -55,6 +64,20 @@ export const NavbarDesktopHome = async () => {
             </div>
           </Link>
         ))}
+        {data?.user ? (
+          <Link className="p-0 m-0" href={"/teacher/courses"}>
+            <div
+              className={cn(
+                "flex items-center gap-x-2 hover:font-extrabold hover:drop-shadow-xl cursor-pointer"
+              )}
+            >
+              <ScanFace />
+              Admin
+            </div>
+          </Link>
+        ) : (
+          ""
+        )}
         {data?.user ? (
           <div className="bg-white text-[#EF0F0F] flex items-center gap-x-3 pr-10 mr-[-40px] rounded-full hover:font-extrabold hover:drop-shadow-xl cursor-pointer">
             <SignOutButton className="hover:font-extrabold " variant="ghost">

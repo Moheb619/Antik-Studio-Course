@@ -6,7 +6,13 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="h-full hover:backdrop-blur-lg bg-red-200">
       <Link href={"/"}>
-        <Image priority={true} src={logo} alt="site-logo" height={undefined} />
+        <Image
+          className="p-5"
+          priority={true}
+          src={logo}
+          alt="site-logo"
+          height={undefined}
+        />
       </Link>
       <main className="h-full">{children}</main>
     </div>

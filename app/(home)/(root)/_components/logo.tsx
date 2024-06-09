@@ -8,6 +8,7 @@ export const Logo = () => {
       width={130}
       alt="logo"
       src="/antik_studio_logo.png"
+      className="cursor-pointer"
     />
   );
 };
