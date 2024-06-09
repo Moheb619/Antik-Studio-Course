@@ -1,7 +1,7 @@
-import { Footer } from "./(root)/_components/footer";
-import { Navbar } from "./(root)/_components/navbar";
-import { NavbarDesktopHome } from "./(root)/_components/navbar-desktop-home";
-import { Sidebar } from "./(root)/_components/sidebar";
+import { Footer } from "./_components/footer";
+import { Navbar } from "./_components/navbar";
+import { NavbarDesktopHome } from "./_components/navbar-desktop-home";
+import { Sidebar } from "./_components/sidebar";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
