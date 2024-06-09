@@ -39,11 +39,16 @@ export const NavbarDesktopHome = async () => {
     <div className={cn("p-4 flex items-center justify-between")}>
       <div>
         <Link href={"/"}>
-          <Image alt="pencil logo" src={Pencil} />
+          <Image
+            priority={true}
+            height={undefined}
+            alt="pencil logo"
+            src={Pencil}
+          />
         </Link>
       </div>
       <div>
-        <Image alt="logo" src={Logo} />
+        <Image priority={true} height={undefined} alt="logo" src={Logo} />
       </div>
       <div
         className={cn(

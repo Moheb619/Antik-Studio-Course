@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Logo } from "./logo";
 import { SidebarRoutes } from "./sidebar-routes";
+import { Logo } from "@/components/logo";
 
 export const Sidebar = () => {
   return (
