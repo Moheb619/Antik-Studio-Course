@@ -4,6 +4,8 @@ import { redirect } from "next/navigation";
 import { NewsSlider } from "./_components/news-slider";
 import { Banner } from "./_components/banner";
 import Loading from "@/app/loading";
+import { CoursesList } from "./_components/courses_list";
+import { OtherPrograms } from "./_components/other-programs";
 
 const Homepage = async () => {
   const data: any = await getServerSession(authOptions);
@@ -13,6 +15,8 @@ const Homepage = async () => {
     <div className="h-full">
       <NewsSlider />
       <Banner />
+      <CoursesList />
+      <OtherPrograms />
     </div>
   );
 };
