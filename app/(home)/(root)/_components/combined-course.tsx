@@ -3,9 +3,9 @@ import Image from "next/image";
 
 export const CombinedCourse = () => {
   return (
-    <div className="mx-auto px-16">
+    <div className="mx-auto md:px-16">
       {/* Main Image and Short BIO */}
-      <div className="flex flex-col rounded-3xl border-red-600 border-[2px] w-[14rem] h-[10rem] items-center justify-between">
+      <div className="flex flex-col rounded-3xl border-red-600 border-[2px] w-[11rem] md:w-[14rem] h-[10rem] items-center justify-between">
         {/* Image Logo */}
         <div className="mt-2">
           <Image priority={true} src={cartoon3} alt="cartoon3" height={60} />
